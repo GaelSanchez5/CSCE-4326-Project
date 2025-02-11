@@ -1,5 +1,9 @@
 # CSCE-4326-Project
 
+CSCE 4326 Project
+
+Repositoy URL: https://github.com/GaelSanchez5/CSCE-4326-Project
+
 Team Members: Gael Sanchez
 
 Description:
