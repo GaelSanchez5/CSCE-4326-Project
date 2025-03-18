@@ -5,7 +5,9 @@ class Process
 public:
 	Process(int pid, int arrival_time, int burst_time, int priority, int memory_required, bool io_operations);
 	void updateState(std::string newState);
-	void execute();
+	void setWaitingTime(int time);
+	void setTurnaroundTime(int time);
+	void execute(int type);
 	int getPid();
 	int getArrivalTime();
 	int getBurstTime();
@@ -30,4 +32,3 @@ private:
 	bool io_operations;
 
 };
-
