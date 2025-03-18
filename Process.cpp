@@ -2,21 +2,35 @@
 
 Process::Process(int pid, int arrival_time, int burst_time, int priority, int memory_required, bool io_operations)
 	: pid(pid), arrival_time(arrival_time), burst_time(burst_time), priority(priority), memory_required(memory_required), io_operations(io_operations),
-	state("NEW"), remaining_time(0), waiting_time(0), turnaround_time(0) {}
+	state("NEW"), remaining_time(burst_time), waiting_time(0), turnaround_time(0) {}
 
 
 void Process::updateState(std::string newState) {
 	state = newState;
 }
-void Process::execute() {
-	updateState("RUNNING");
-	remaining_time = burst_time;
 
-	for (int i = 0; i <= burst_time; i++) {
+void Process::setWaitingTime(int time) {
+	waiting_time = time;
+}
+
+void Process::setTurnaroundTime(int time) {
+	turnaround_time = time;
+}
+
+void Process::execute(int type) {
+	updateState("RUNNING");
+
+	if (type == 1) {
 		turnaround_time++;
 		remaining_time--;
+		return;
 	}
-
+	else {
+		for (int i = 0; i < burst_time; i++) {
+			turnaround_time++;
+			remaining_time--;
+		}
+	}
 	updateState("TERMINATED");
 }
 
