@@ -146,7 +146,25 @@ int main()
 
     };
 
+    vector<int> virtualAdresses = {
+    1000, 5000, 8192, 12288 };
+
+   vector<int> physicalAdresses = {
+    0, 0, 0, 0 };
+
     FCFS(processes);
     SJF(processes);
     SRT(processes);
+
+     for (int i = 0; i < processes.size(); i++) {
+         processes.at(i).getPageTable()->assignFrame(i , (4 - i));
+         physicalAdresses.at(i) = processes.at(i).getPageTable()->translate(virtualAdresses.at(i));
+    }
+
+
+    for (int i = 0; i < processes.size(); i++) {
+         cout << "P" << processes.at(i).getPid() << ":" << endl;
+         cout << "Virtual Adress:" << virtualAdresses.at(i) << endl;
+         cout << "Physical Adress:" << physicalAdresses.at(i) << endl << endl;
+    } 
 }
